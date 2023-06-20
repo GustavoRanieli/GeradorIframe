@@ -25,14 +25,18 @@ function obterListaNovamente(){
 }
 
 // Rota de recuperação da lista
-router.get('/list', ( req, res ) => {
+router.get('/RecuperarLista', ( req, res ) => {
     obterListaNovamente()
     res.send('Lista Recuperada')
 })
 
+router.get('/lista', ( req, res ) => {
+    res.render('listaPDFs')
+})
+
 // Função que adiciona um novo pdf a lista
 function listPDF(pasta, nome){
-    const caminho = path.join(__dirname, '..', 'public', 'uploads', 'listaPDFs.html')
+    const caminho = path.join(__dirname, '..', 'views', 'listaPDFs.ejs')
 
 
     // Envia novo pdf para a lista

@@ -7,48 +7,17 @@ const fs = require('fs');
 // Array de listagem
 const listArray = []
 
-
-function obterListaNovamente(){
-    const updatePath = path.join(__dirname, '..', 'public', 'uploads')
-
-    // função que lê toda a pasta uploads e para cada pasta adiciona ao array
-   fs.readdir(updatePath, { withFileTypes: true }, (err, files) => {
-        if (err) {
-          console.error('Erro ao ler as pastas:', err);
-          return;
-        }
-        const pastas = files.filter(file => file.isDirectory()).map(file => {
-            listArray.push({name: file.name, url: `/uploads/${file.name}/${file.name}.pdf`})
-        });
-    })
-    console.log('Lista Recuperada!')
-}
-
-// Rota de recuperação da lista
-router.get('/RecuperarLista', ( req, res ) => {
-    obterListaNovamente()
-    res.send('Lista Recuperada')
-})
-
-router.get('/lista', ( req, res ) => {
-    res.render('listaPDFs')
-})
-
-// Função que adiciona um novo pdf a lista
-function listPDF(pasta, nome){
+// Criando a view da lista
+function criarView(){
     const caminho = path.join(__dirname, '..', 'views', 'listaPDFs.ejs')
 
-
-    // Envia novo pdf para a lista
-    listArray.push({name: nome, url: `/uploads/${pasta}/${nome}`})
-
-    // Adiciona o novo pdf na estring com quebra de linha
+    // Cria uma string grande com todos os pdfs e quebra de linha
     let pdfs = ''
     listArray.forEach((pdf) => {
         pdfs += `<li><a href="${pdf.url}">${pdf.name}</a></li>\n`
     });
 
-
+    // Html da lista
     let html = `
     <!DOCTYPE html>
     <html>
@@ -69,6 +38,47 @@ function listPDF(pasta, nome){
     } catch {
         console.log('Erro ao criar a lista')
     }
+}
+
+// Recuperando a lista
+function obterListaNovamente(){
+    const updatePath = path.join(__dirname, '..', 'public', 'uploads')
+
+    // função que lê toda a pasta uploads e para cada pasta adiciona ao array
+   fs.readdir(updatePath, { withFileTypes: true }, (err, files) => {
+        if (err) {
+          console.error('Erro ao ler as pastas:', err);
+          return;
+        }
+        const pastas = files.filter(file => file.isDirectory()).map(file => {
+            listArray.push({name: file.name, url: `/uploads/${file.name}/${file.name}.pdf`})
+        });
+    })
+    
+    setTimeout(() => {
+        criarView()
+    }, 800)
+    
+}
+
+// Rota de recuperação da lista
+router.get('/RecuperarLista', ( req, res ) => {
+    obterListaNovamente()
+    setTimeout(() => {
+        res.redirect('/uploads/lista')
+    }, 800)
+})
+
+// Rota da lista
+router.get('/lista', ( req, res ) => {
+    res.render('listaPDFs')
+})
+
+// Função que adiciona um novo pdf a lista
+function listPDF(pasta, nome){
+    // Envia novo pdf para a lista
+    listArray.push({name: nome, url: `/uploads/${pasta}/${nome}`})
+    criarView()
 }
 
 

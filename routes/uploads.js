@@ -4,6 +4,70 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+// Array de listagem
+const listArray = []
+
+
+function obterListaNovamente(){
+    const updatePath = path.join(__dirname, '..', 'public', 'uploads')
+
+    // função que lê toda a pasta uploads e para cada pasta adiciona ao array
+   fs.readdir(updatePath, { withFileTypes: true }, (err, files) => {
+        if (err) {
+          console.error('Erro ao ler as pastas:', err);
+          return;
+        }
+        const pastas = files.filter(file => file.isDirectory()).map(file => {
+            listArray.push({name: file.name, url: `/uploads/${file.name}/${file.name}.pdf`})
+        });
+    })
+    console.log('Lista Recuperada!')
+}
+
+// Rota de recuperação da lista
+router.get('/list', ( req, res ) => {
+    obterListaNovamente()
+    res.send('Lista Recuperada')
+})
+
+// Função que adiciona um novo pdf a lista
+function listPDF(pasta, nome){
+    const caminho = path.join(__dirname, '..', 'public', 'uploads', 'listaPDFs.html')
+
+
+    // Envia novo pdf para a lista
+    listArray.push({name: nome, url: `/uploads/${pasta}/${nome}`})
+
+    // Adiciona o novo pdf na estring com quebra de linha
+    let pdfs = ''
+    listArray.forEach((pdf) => {
+        pdfs += `<li><a href="${pdf.url}">${pdf.name}</a></li>\n`
+    });
+
+
+    let html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Lista dos PDFs</title>
+    </head>
+    <body>
+        <h1>Lista de Hiperlinks</h1>
+        <ul>
+            ${pdfs}
+        </ul>
+    </body>
+    `
+    // Reescreve o arquivo com as novas informações
+    try{
+        fs.writeFileSync(caminho, html); //Criar
+        console.log('Lista criada!')
+    } catch {
+        console.log('Erro ao criar a lista')
+    }
+}
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads/');
@@ -61,6 +125,9 @@ router.post('/teste', upload.single('pdfFile'), (req, res) => {
 
     fs.writeFileSync(path.join(pastaDestino, 'index.html'), html);
     fs.writeFileSync(path.join(pastaDestino, 'iframe.html'), iframe);
+
+    // Adicionando a lista
+    listPDF(nomePasta, nomeArquivo)
 
     res.send('Arquivo enviado com sucesso!');
 });

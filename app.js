@@ -7,6 +7,8 @@ var ejs = require('ejs')
 
 var indexRouter = require('./routes/index');
 var uploadsRouter = require('./routes/uploads');
+var iframesRouter = require('./routes/iframes');
+var iframesprontos = require('./routes/iframesprontos');
 
 var app = express();
 
@@ -18,11 +20,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/views', express.static(path.join(__dirname, 'views')));
 
+// Rotas principais de navegação
 app.use('/', indexRouter);
 app.use('/uploads', uploadsRouter)
-
+app.use('/iframes', iframesRouter)
+app.use('/iframesprontos', iframesprontos)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

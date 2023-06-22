@@ -1,0 +1,36 @@
+
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Visualizar PDF</title>
+                </head>
+                <script>
+                    function copiarIframe() {
+                        var iframeTag = "<iframe src='http://localhost:3000/uploads/Boleto3038590/Boleto3038590.pdf' width='100%' height='1000px' type='application/pdf'></iframe>";
+                    
+                        navigator.clipboard.writeText(iframeTag)
+                        .then(function() {
+                            alert('A tag do iframe foi copiada para a área de transferência!');
+                        })
+                        .catch(function(error) {
+                            console.error('Erro ao copiar a tag do iframe:', error);
+                        });
+                    }
+                </script>
+                <body>
+                    <h1>Seu iframe:</h1>
+                    <div>
+                        <pre>
+                            <code>
+                                <xmp>
+                                    <iframe src="http://localhost:3000/uploads/Boleto3038590/Boleto3038590.pdf" width="100%" height="1000px" type="application/pdf">
+                                </xmp>
+                            </code>
+                        </pre>
+                        <button onclick="copiarIframe()">Copiar Livro</button>
+                        <a href="/"><button>Voltar ao inicio</button></a>
+                    </div>
+                    <iframe src="/uploads/Boleto3038590/Boleto3038590.pdf" width="100%" height="1000px" type="application/pdf">
+                </body>
+                </html>
+            

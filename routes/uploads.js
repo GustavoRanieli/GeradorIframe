@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const multer = require('multer');
+const path = require('path')
 const uploadController = require('../controller/uploadController');
 
 // processamento dos dados de formulário enviados pelo cliente (pdfs)
@@ -22,11 +23,8 @@ router.get('/', function (req, res) {
 
 router.get('/:pasta/:pdf', ( req, res ) =>  {
     let pasta = req.params.pasta;
-    let pdf = req.params.pdf;
-    pdf.replace('.pdf', '.html')
-    res.sendFile(`D:/Recursos/GeradorIframe2/views/uploads/${pasta}/iframe.html`);
+    res.sendFile(path.join(__dirname, '..', 'views', 'uploads', `${pasta}`, 'iframe.html'));
 })
-
 
 /* Cria diretorios para cada pdf e Envia os pdfs para dentro do projeto */
 router.post('/pdfupload', upload.single('pdfFile'), uploadController.criarDiretoriosPdfs );

@@ -15,9 +15,7 @@ class IframeController {
     console.log(listaDiretorios);
 
     res.render('iframes', { listaDiretorios });
-    }
-
-    
+    } 
 }
 
 module.exports = new IframeController;

@@ -1,0 +1,45 @@
+
+            <!DOCTYPE html>
+            <html lang="pt_Br">
+            
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Iframes pdf</title>
+                <link rel="stylesheet" href="/public/stylesheets/css/reset.css">
+                <link rel="stylesheet" href="/public/stylesheets/css/style.css">
+            </head>
+                <script>
+                    function copiarIframe() {
+                        var iframeTag = "<iframe src='http://localhost:3000/uploads/CurriculoGustavo/CurriculoGustavo.pdf' width='100%' height='1000px' type='application/pdf'></iframe>";
+                    
+                        navigator.clipboard.writeText(iframeTag)
+                        .then(function() {
+                            alert('A tag do iframe foi copiada para a área de transferência!');
+                        })
+                        .catch(function(error) {
+                            console.error('Erro ao copiar a tag do iframe:', error);
+                        });
+                    }
+                </script>
+                <body>
+                    <div class="container_iframe">
+                        <h1>Seu iframe:</h1>
+                            <div class="div_iframe">
+                                <pre>
+                                    <code>
+                                        <xmp>
+                                            <iframe src="http://localhost:3000/uploads/CurriculoGustavo/CurriculoGustavo.pdf"  type="application/pdf">
+                                        </xmp>
+                                    </code>
+                                </pre>
+                            <div class="div_buttons">
+                                <button onclick="copiarIframe()">Copiar Livro</button>
+                                <a href="/"><button>Voltar ao inicio</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <iframe class="iframe" src="/uploads/CurriculoGustavo/CurriculoGustavo.pdf" type="application/pdf">
+                </body>
+                </html>
+            

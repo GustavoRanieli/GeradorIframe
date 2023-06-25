@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt_Br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Upload pdf</title>
+  <link rel="stylesheet" href="/public/stylesheets/css/reset.css">
+  <link rel="stylesheet" href="/public/stylesheets/css/style.css">
 </head>
 
 <body>
   <form action="/uploads/pdfupload" method="post" enctype="multipart/form-data">
-    <input type="file" name="pdfFile">
-    <button type="submit">Enviar</button>
-    <a href="/"><button>Voltar ao início</button></a>
+    <div class="container">
+      <div class="div_upload">
+        <div>
+          <input class="input" type="file" name="pdfFile">
+          <button class="bt_upload" type="submit">Enviar</button>
+        </div>
+        <a href="/"><button type="button" class="bt_upload">Voltar ao início</button></a>
+      </div>
+      <div>
+      </div>
+    </div>
   </form>
 </body>
 

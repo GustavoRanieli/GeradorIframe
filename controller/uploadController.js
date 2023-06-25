@@ -28,11 +28,16 @@ class UploadController{
 
             // Cria o arquivo index.html com o embed do PDF
             const html = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Visualizar PDF</title>
-                </head>
+            <!DOCTYPE html>
+            <html lang="pt_Br">
+            
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Iframes pdf</title>
+                <link rel="stylesheet" href="/public/stylesheets/css/reset.css">
+                <link rel="stylesheet" href="/public/stylesheets/css/style.css">
+            </head>
                 <script>
                     function copiarIframe() {
                         var iframeTag = "<iframe src='http://localhost:3000/uploads/${nomePasta}/${nomeArquivo}' width='100%' height='1000px' type='application/pdf'></iframe>";
@@ -47,19 +52,23 @@ class UploadController{
                     }
                 </script>
                 <body>
-                    <h1>Seu iframe:</h1>
-                    <div>
-                        <pre>
-                            <code>
-                                <xmp>
-                                    <iframe src="http://localhost:3000/uploads/${nomePasta}/${nomeArquivo}" width="100%" height="1000px" type="application/pdf">
-                                </xmp>
-                            </code>
-                        </pre>
-                        <button onclick="copiarIframe()">Copiar Livro</button>
-                        <a href="/"><button>Voltar ao inicio</button></a>
+                    <div class="container_iframe">
+                        <h1>Seu iframe:</h1>
+                            <div class="div_iframe">
+                                <pre>
+                                    <code>
+                                        <xmp>
+                                            <iframe src="http://localhost:3000/uploads/${nomePasta}/${nomeArquivo}"  type="application/pdf">
+                                        </xmp>
+                                    </code>
+                                </pre>
+                            <div class="div_buttons">
+                                <button onclick="copiarIframe()">Copiar Livro</button>
+                                <a href="/"><button>Voltar ao inicio</button></a>
+                            </div>
+                        </div>
                     </div>
-                    <iframe src="/uploads/${nomePasta}/${nomeArquivo}" width="100%" height="1000px" type="application/pdf">
+                    <iframe class="iframe" src="/uploads/${nomePasta}/${nomeArquivo}" type="application/pdf">
                 </body>
                 </html>
             `;
@@ -128,7 +137,7 @@ class UploadController{
             res.status(200).render('arquivoEnviado') 
         }else{
             // Retira os caracteres especiais com a exceção do ponto
-            const nomeArquivo = req.file.originalname.replace(/[^a-zA-Z0-9]/g, '');
+            const nomeArquivo = req.file.originalname;
             // Apaga o arquivo que o multer moveu para o uploads
             setTimeout(() => {
                 fs.unlink(path.join(__dirname, '..', 'views', 'uploads', nomeArquivo), (err) => {

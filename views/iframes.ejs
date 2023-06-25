@@ -1,26 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt_Br">
 
 <head>
-    <title>Iframes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iframes pdf</title>
+  <link rel="stylesheet" href="/public/stylesheets/css/reset.css">
+  <link rel="stylesheet" href="/public/stylesheets/css/style.css">
 </head>
 
 <body>
-    <h1>Lista de Diretórios</h1>
-    <% if (listaDiretorios && listaDiretorios.length> 0) { %>
-        <ul>
-            <% listaDiretorios.forEach(function(link) { %>
-                <li>
-                    <a href="/iframesprontos/<%= link %>">
-                        <%= link %>
-                    </a>
-                </li>
-                <% }); %>
-        </ul>
-        <a href="/"><button>Voltar ao início</button></a>
-        <% } else { %>
-            <p>Nenhum diretório encontrado.</p>
-        <% } %>
+    <div class="container">
+        <div class="div_lista">
+            <h1 class="list">Lista de Diretórios</h1>
+            <% if (listaDiretorios && listaDiretorios.length> 0) { %>
+                <ul>
+                    <% listaDiretorios.forEach(function(link) { %>
+                        <li>
+                            <a href="/iframesprontos/<%= link %>">
+                                <%= link %>
+                            </a>
+                        </li>
+                        <% }); %>
+                </ul>
+                <a href="/"><button class="bt_upload">Voltar ao início</button></a>
+                <% } else { %>
+                    <p>Nenhum diretório encontrado.</p>
+                <% } %>
+        </div>
+    </div>
 </body>
 
 </html>

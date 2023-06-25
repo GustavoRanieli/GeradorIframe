@@ -1,0 +1,193 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800&display=swap');
+
+html{
+    background-image: url('../../images/fundoIframe.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+}
+
+@mixin button($padding: 2%, $font_size: 1.5vw){
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    padding: $padding;
+    margin: 2% 0%;
+    font-size: $font_size;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+@mixin flex_div(){
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin h1($color: #000){
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5vw;
+    margin-bottom: 5%;
+    font-weight: 700;
+    color: $color;
+}
+
+.container{
+    @include flex_div();
+    width: 40%;
+    height: 50vh;
+    margin: 10% auto;
+    background-image: url('../../images/backgroundMenus.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
+    border: transparent;
+    border-radius: 15px;
+
+        // Estilo especifico da página index
+        .div_idex{
+            margin: 20% auto;
+            justify-content: center;
+            text-align: center
+        }
+
+        // Estilo especifico da página upload
+        .div_upload{
+            margin: 20% auto;
+            @include flex_div();
+
+                .input{
+                    font-family: 'Montserrat', sans-serif;  
+                }
+
+                .input[type=file]{
+                    border: 1px solid #222;
+                    border-radius: 15px;
+                    padding: 1%;
+                }
+
+                .input[type=file]::file-selector-button{
+                    @include button($padding: 1%, $font_size: 1vw);
+                    margin-right: 1%
+                }      
+        }   
+
+        // Estilo especifico da página de lista
+        .div_lista{
+            @include flex_div();
+            margin: 10% auto;
+            text-align: center;
+
+                h1{
+                    @include h1;
+                }
+
+                ul{
+                    text-align: start;
+                    margin-bottom: 5%;
+                    overflow-y: scroll;
+                    height: 10.5vw;
+                }
+                ul li{
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 0.8vw;
+                    margin: 3% 0%;
+                }
+                ul a{
+                    text-decoration: none;
+                }
+                p{
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 0.8vw; 
+                }
+                /* Largura da barra de rolagem */
+                ::-webkit-scrollbar {
+                    width: 10px;
+                }
+                
+                /* Cor de fundo da trilha da barra de rolagem */
+                ::-webkit-scrollbar-track {
+                    background: #f1f1f1; 
+                }
+            
+                /* Cor do manípulo da barra de rolagem */
+                ::-webkit-scrollbar-thumb {
+                    background: #3137fd; 
+                    border: transparent;
+                    border-radius: 10px;
+                }
+            
+                /* Cor do manípulo ao passar o mouse */
+                ::-webkit-scrollbar-thumb:hover {
+                    background: #555; 
+                }
+        }
+
+        .div_errUpload{
+            @include flex_div();
+            margin: 20% auto;
+            text-align: center;
+
+                .existente{
+                    @include h1($color: #ffb200);
+                }
+
+                .err{
+                    @include h1($color: #d30000);
+                }
+
+                .sucess{
+                    @include h1($color: #3cb043)
+                }
+        }
+}
+
+.bt_index{
+    @include button();
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.bt_upload{
+    @include button($padding: 1%, $font_size: 1vw);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.container_iframe{
+    margin: 5% auto;
+
+        h1{
+            @include h1;
+            text-align:center
+        }
+
+        .div_iframe{
+            background-color: #f1f1f1;
+            width: 80%;
+            margin: 0% auto;
+            border: transparent;
+            border-radius: 10px;
+                pre{
+                    height: 5vh;
+                }
+                code{
+                    width: 50%;
+                    text-align: center;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 1vw;
+                    padding-top: 5%   ;
+                }
+        }
+
+        .div_buttons{
+            padding: 3% 2%;
+            text-align: center;
+
+                button{
+                    @include button($padding: 1%, $font_size:1vw)
+                }
+        }
+}
+
+.iframe{
+    width: 100%;
+    height: 22vw;
+    border: transparent;
+    border-radius: 15px;
+}

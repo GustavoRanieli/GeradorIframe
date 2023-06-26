@@ -57,9 +57,7 @@ class UploadController{
                             <div class="div_iframe">
                                 <pre>
                                     <code>
-                                        <xmp>
-                                            <iframe src="http://localhost:3000/uploads/${nomePasta}/${nomeArquivo}"  type="application/pdf">
-                                        </xmp>
+                                        <xmp><iframe src="http://localhost:3000/uploads/${nomePasta}/${nomeArquivo}"  type="application/pdf"></xmp>
                                     </code>
                                 </pre>
                             <div class="div_buttons">
@@ -120,7 +118,7 @@ class UploadController{
                         <div class="row">
                             <div class="col-xs-12" style="padding-bottom:30px">
                             <!--Normal FLipbook-->
-                            <div class="_df_book" height="600" webgl="true" 
+                            <div class="_df_book" height="1800px" webgl="true" 
                                     source="/views/uploads/${nomePasta}/${nomeArquivo}">
                             </div>
                             </div>
